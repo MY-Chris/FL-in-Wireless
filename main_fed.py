@@ -121,7 +121,9 @@ if __name__ == '__main__':
                 deltaw_list = []
                 for k in w_glob.keys():
                     delta_w = w[k] - w_glob[k]
-                    deltaw_list.append(delta_w.resize(1, torch.numel(delta_w)))
+                    delta_w_new = delta_w.resize(1, torch.numel(delta_w))
+                    deltaw_list.append(delta_w_new)
+                #test difference in different layers
                 big_tensor = torch.cat(deltaw_list, 1)
                 topvalues, topindices = torch.topk(big_tensor, q_t[idx])
                 bottomvalues, bottomindices = torch.topk(big_tensor, q_t[idx], largest=False)
