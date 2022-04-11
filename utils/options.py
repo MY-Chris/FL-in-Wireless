@@ -40,5 +40,8 @@ def args_parser():
 
     # wireless arguments
     parser.add_argument('--schedule_policy', type=str, default='D', help="choose schedule policy, options include A, B, C, D")
+    parser.add_argument('--rate', type=float, default=0.5, help="choose the rate multiplied everytime when an entry is chosen")
+    parser.add_argument('--cellsize', type=int, default=5000, help="cellsize")
+    parser.add_argument('--frequency', type=int, default=200, help="...MHz")
     args = parser.parse_args()
     return args
