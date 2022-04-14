@@ -131,7 +131,9 @@ for p in policy:
                         deltaw_list.append(delta_w_new)
                     #test difference in different layers
                     big_tensor = torch.cat(deltaw_list, 1)
-                    big_tensor = torch.mul(big_tensor, torch.Tensor(ratelist[idx]))
+                    rate = torch.Tensor(ratelist[idx])
+                    rate = rate.to(device=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
+                    big_tensor = torch.mul(big_tensor, rate)
                     topvalues, topindices = torch.topk(big_tensor, q_t[idx])
                     bottomvalues, bottomindices = torch.topk(big_tensor, q_t[idx], largest=False)
                     values = torch.cat((topvalues, bottomvalues), 1).cpu().numpy()
